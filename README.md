@@ -16,7 +16,7 @@ $ docker-compose up -d
 
 ## 📊 Data flow 
 
-[...] 
+![data-flow](.\docs\assets\data-flow-card.png)
 
 
 
