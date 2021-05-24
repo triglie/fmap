@@ -13,6 +13,6 @@ FROM openjdk:8-jre-alpine
 WORKDIR /fmap-server
 
 COPY --from=build /fmap-server/target/fmap-server-fmap-server-1.0.jar .
-COPY ../fmdata /fmap-server/Resources
+COPY fmdata /fmap-server/Resources
 
 CMD ["java", "-cp", "fmap-server-fmap-server-1.0.jar", "ita.triglie.FMapServerStream"]
