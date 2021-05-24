@@ -54,7 +54,7 @@ def generate_random_frequence_by_province(province):
     nearest_province = get_nearest_province(province, prov_with_freqs)
     if (cache_df is None):
         print(f'[{province}] fetching csv from github')
-        url = f'https://raw.githubusercontent.com/triglie/FMap-server/main/scrapers/data/fm-station-map-{nearest_province.lower()}.csv'
+        url = f'https://raw.githubusercontent.com/triglie/fmap/main/kafkastream/fmdata/fm-station-map-{nearest_province.lower()}.csv'
         print(url)
         cache_df = pd.read_csv(url, sep=',')
     return cache_df['frequency'][random.randint(0, cache_df.shape[0] - 1)]
