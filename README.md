@@ -16,10 +16,9 @@ $ docker-compose up -d
 
 ## 📊 Data flow 
 
-<div style="text-align:center"
-	<img src="./docs/assets/data-flow-card.png" alt="data-flow" width=500/>
-</div>
-
+<p align="center">
+  <img src="./docs/assets/data-flow-card.png" alt="data-flow" width=500/>
+</p>
 
 
 
