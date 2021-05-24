@@ -65,7 +65,7 @@ if __name__ == '__main__':
             for station_name in station_names:
                 stations.append({'name': station_name, 'frequency': frequency})
         
-        csv_file = f'../fmdata/fm-station-map-{province}.csv'
+        csv_file = f'../kafkastream/fmdata/fm-station-map-{province}.csv'
         try:
             with open(csv_file, 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=['name', 'frequency'])

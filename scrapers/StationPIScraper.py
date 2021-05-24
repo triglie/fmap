@@ -22,7 +22,7 @@ if __name__ == '__main__':
         for f in freq.split('-'):
             stations.append({'name': name, 'frequency': f.replace(',', '.'), 'pi': rspi}) 
 
-    csv_file = '../fmdata/complete-pi-station-map.csv'
+    csv_file = '../kafkastream/fmdata/complete-pi-station-map.csv'
     try:
         with open(csv_file, 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=['name', 'frequency', 'pi'])
