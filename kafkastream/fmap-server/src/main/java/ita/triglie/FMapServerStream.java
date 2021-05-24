@@ -35,8 +35,9 @@ public class FMapServerStream {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println(stationName);
-                return new KeyValue<String, String>(k, v.toUpperCase());
+                //System.out.println(stationName);
+                jsonObject.put("station_name", stationName);
+                return new KeyValue<String, String>(k, jsonObject.toString());
             })
             .to("rds-signal-output");
 
