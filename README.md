@@ -26,25 +26,23 @@ $ docker-compose up -d
 
  Frequency - StationName (province) maps are stored in `fmdata` directory: 
 
-| Province | URL                                                          |
-| -------- | ------------------------------------------------------------ |
-| Catania  | [Link to Catania csv](https://github.com/triglie/FMap-server/blob/main/scrapers/data/fm-station-map-catania.csv) |
-| Messina  | [Link to Messina csv](https://github.com/triglie/FMap-server/blob/main/scrapers/data/fm-station-map-messina.csv) |
-| Palermo  | [Link to Palermo csv](https://github.com/triglie/FMap-server/blob/main/scrapers/data/fm-station-map-palermo.csv) |
+| Province | File path                                     |
+| -------- | --------------------------------------------- |
+| Catania  | kafkastream/fmdata/fm-station-map-catania.csv |
+| Messina  | kafkastream/fmdata/fm-station-map-messina.csv |
+| Palermo  | kafkastream/fmdata/fm-station-map-palermo.csv |
 
 > Any other province outside of this three uses the csv of the nearest province. 
 
 Frequency - PI - StationName map is stored in `fmdata` directory: 
 
-| State    | URL                                                          |
-| -------- | ------------------------------------------------------------ |
-| Italia   | [Link to National FM map csv](https://github.com/triglie/FMap-server/blob/main/scrapers/data/complete-pi-station-map.csv) |
+| State  | File path                                      |
+| ------ | ---------------------------------------------- |
+| Italia | kafkastream/fmdata/complete-pi-station-map.csv |
 
 
 
 ## Useful links 
-
-To use Kafka UI, go to http://localhost:8080 
 
 | Container     | URL                                             | Description                           |
 | ------------- | ----------------------------------------------- | ------------------------------------- |
