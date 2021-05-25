@@ -11,6 +11,8 @@ services:
     environment:
         ZOOKEEPER_CLIENT_PORT: 2181
         ZOOKEEPER_SERVER_ID: "1"
+        ZOOKEEPER_HEAP_OPTS: -Xmx512m -Xmx512m
+    mem_limit: 1g
     networks: 
         - fmap-int
 
@@ -31,6 +33,8 @@ services:
       KAFKA_DEFAULT_REPLICATION_FACTOR: 2
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 2
+      KAFKA_HEAP_OPTS: -Xmx512m -Xmx512m
+    mem_limit: 1g
     networks: 
         - fmap-int
         - fmap-com 
@@ -50,6 +54,8 @@ services:
     environment:
         KAFKA_BROKER_ID: ignored
         KAFKA_ZOOKEEPER_CONNECT: ignored
+        KAFKA_HEAP_OPTS: -Xmx512m -Xmx512m
+    mem_limit: 1g
     networks:
         - fmap-int
 
@@ -78,6 +84,8 @@ services:
       KAFKA_DEFAULT_REPLICATION_FACTOR: 2
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 2
+      KAFKA_HEAP_OPTS: -Xmx512m -Xmx512m
+    mem_limit: 1g
     networks: 
         - fmap-int
         - fmap-com 
@@ -90,10 +98,12 @@ services:
         KAFKA_CLUSTERS_0_NAME: my_cluster
         KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
         KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafkaserver:9092
+        KAFKA_CLUSTERS_0_HEAP_OPTS: -Xmx512m -Xmx512m
     ports: 
         - 8080:8080
-    depends_on: 
+    depends_on:
         - kafkaserver
+    mem_limit: 1g
     networks: 
         - fmap-int
 
@@ -106,6 +116,9 @@ services:
         - $PWD/logs/:/usr/share/logstash/logs/
     depends_on: 
         - kafkaserver
+    environment: 
+        - "LS_JAVA_OPTS=-Xms1g -Xmx1g"
+    mem_limit: 2g
     networks: 
       - fmap-ext 
       - fmap-com 
@@ -141,6 +154,7 @@ services:
       memlock:
         soft: -1
         hard: -1
+    mem_limit: 1g
     networks: 
     - fmap-int 
 
@@ -180,6 +194,8 @@ services:
       CONNECT_LOG4J_ROOT_LOGLEVEL: INFO
       CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
       CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-3.3.0.jar
+      KAFKA_HEAP_OPTS: -Xmx512m -Xmx512m
+    mem_limit: 1g
     networks: 
       - fmap-int     
 
