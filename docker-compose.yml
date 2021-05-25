@@ -125,6 +125,8 @@ services:
 
 
   elasticsearch:
+    container_name: elasticsearch
+    hostname: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:5.6.3
     ports:
       - "9200:9200"
@@ -144,6 +146,8 @@ services:
 
 
   connect:
+    container_name: connect
+    hostname: connect
     image: confluentinc/cp-kafka-connect:3.3.0
     ports:
       - 8083:8083
@@ -179,7 +183,19 @@ services:
     networks: 
       - fmap-int     
 
+
+  kafka-connector-create: 
+    container_name: kafka-connector-create
+    build: 
+      context: kafkaconnect
+    image: fmap:kafka-connector-create
+    depends_on:
+      - kafkaserver
+      - connect
+    networks: 
+      - fmap-int
     
+
 networks:
 
   fmap-int:
