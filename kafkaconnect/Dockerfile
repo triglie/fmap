@@ -1,7 +1,10 @@
-FROM bash:4.4
+FROM python:3
 
-RUN apk add curl
+WORKDIR /usr/src/app
 
-COPY create-connector.sh /
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["bash", "/create-connector.sh"]
+COPY . .
+
+CMD [ "python", "./create-connector.py" ]
