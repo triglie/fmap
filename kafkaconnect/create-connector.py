@@ -5,7 +5,7 @@ status=500
 headers = {'Content-type': 'application/json'}
 data = '{ "name": "elasticsearch-connector", "config": { "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector", "tasks.max": "1", "topics": "rds-signal-output", "key.ignore": "true", "schema.ignore": "true", "connection.url": "http://elasticsearch:9200", "type.name": "test-type", "name": "elasticsearch-sink" } }'
 
-print("starting to requests")
+print("starting to request")
 
 while (status not in [200, 409]):
     time.sleep(2); 
