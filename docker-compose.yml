@@ -159,6 +159,18 @@ services:
     - fmap-int 
 
 
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.12.1
+    container_name: kibana
+    hostname: kibana
+    ports:
+      - "5601:5601"
+    depends_on: 
+      - elasticsearch
+    networks: 
+      - fmap-int
+
+
   connect:
     container_name: connect
     hostname: connect
