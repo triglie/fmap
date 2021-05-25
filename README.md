@@ -42,11 +42,17 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 
 
 
-## Kafka UI 
+## Useful links 
 
 To use Kafka UI, go to http://localhost:8080 
 
-![kafka ui](./docs/assets/kafka-ui.png)
+| Container     | URL                                             | Description                           |
+| ------------- | ----------------------------------------------- | ------------------------------------- |
+| kafkaserver   | http://localhost:8080                           | Open kafka UI to monitor kafka server |
+| connect       | http://localhost:8083                           | Kafka Connect base URL                |
+| connect       | http://localhost:8083/connectors                | Kafka Connect connectors list         |
+| elasticsearch | http://localhost:9200/                          | ElasticSearch base URL                |
+| elasticsearch | http://localhost:9200/rds-signal-output/_search | ElasticSearch index content           |
 
 
 
