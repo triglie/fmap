@@ -82,6 +82,7 @@ services:
         - fmap-int
         - fmap-com 
   
+
   webui:
     image: provectuslabs/kafka-ui:latest
     container_name: kafkaWebUI
@@ -96,6 +97,7 @@ services:
     networks: 
         - fmap-int
 
+
   logstash:
     container_name: logstash
     image: docker.elastic.co/logstash/logstash:7.11.2
@@ -108,6 +110,7 @@ services:
       - fmap-ext 
       - fmap-com 
   
+
   simulator: 
     container_name: simulator
     image: python:3.9.5
@@ -120,6 +123,63 @@ services:
       - fmap-ext 
       - fmap-com 
 
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.3
+    ports:
+      - "9200:9200"
+      - "9300:9300"      
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks: 
+    - fmap-int 
+
+
+  connect:
+    image: confluentinc/cp-kafka-connect:3.3.0
+    ports:
+      - 8083:8083
+    depends_on:
+      - zookeeper
+      - kafkaserver
+    volumes:
+      - $PWD/connect-plugins:/connect-plugins
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: kafkaserver:9092
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: "connect"
+      CONNECT_CONFIG_STORAGE_TOPIC: connect-config
+      CONNECT_OFFSET_STORAGE_TOPIC: connect-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: connect-status
+      CONNECT_REPLICATION_FACTOR: 1
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.storage.StringConverter"
+      CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
+      CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
+      CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+      CONNECT_REST_ADVERTISED_HOST_NAME: "connect"
+      CONNECT_ZOOKEEPER_CONNECT: zookeeper:2181
+      CONNECT_PLUGIN_PATH: /connect-plugins
+      CONNECT_LOG4J_ROOT_LOGLEVEL: INFO
+      CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
+      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-3.3.0.jar
+    networks: 
+      - fmap-int     
+
+    
 networks:
 
   fmap-int:
@@ -132,4 +192,4 @@ networks:
   
   fmap-com: 
     name: fmap-com
-    driver: bridge    
+    driver: bridge
