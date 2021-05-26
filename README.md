@@ -1,6 +1,9 @@
 <h1 align="center">fmap (Frequence Mapper)</h1>
 <p align="center">(🇮🇹) Monitora la qualità della ricezione dei segnali radio nelle province siciliane. </p>
-<p align="center">(🇺🇸) Monitors the quality of radio signal reception in the Sicilian provinces. </p>
+<p align="center">(🇺🇸) Monitors the quality of radio signal reception in the Sicilian provinces. </p><br>
+<img align="center" src="docs/assets/cover.png" style="zoom: 50%;" >
+
+
 
 
 
@@ -51,6 +54,7 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 | connect       | http://localhost:8083/connectors                | Kafka Connect connectors list         |
 | elasticsearch | http://localhost:9200/                          | ElasticSearch base URL                |
 | elasticsearch | http://localhost:9200/rds-signal-output/_search | ElasticSearch index content           |
+| kibana        | http://localhost:5601                           | Kibana base URL                       |
 
 
 
