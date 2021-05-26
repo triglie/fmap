@@ -49,7 +49,7 @@ services:
     command: "bash -c 'echo Waiting for Kafka to be ready... && \
                         cub kafka-ready -b kafkaserver:9092 1 200 && \
                         kafka-topics --create --topic rds-signal --if-not-exists --zookeeper zookeeper:2181 --partitions 1 --replication-factor 1 && \
-                        kafka-topics --create --topic rds-signal-output --if-not-exists --zookeeper zookeeper:2181 --partitions 1 --replication-factor 1 &&\
+                        kafka-topics --create --topic rds-signal-output --if-not-exists --zookeeper zookeeper:2181 --partitions 2 --replication-factor 1 &&\
                         sleep infinity'"
     environment:
         KAFKA_BROKER_ID: ignored
@@ -140,7 +140,6 @@ services:
   elasticsearch:
     container_name: elasticsearch
     hostname: elasticsearch
-    # image: docker.elastic.co/elasticsearch/elasticsearch:5.6.3
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
     ports:
       - "9200:9200"
@@ -160,6 +159,18 @@ services:
     - fmap-int 
 
 
+  kafka-to-es: 
+    container_name: kafka-to-es
+    build: 
+      context: kafka-to-es
+    image: fmap:kafka-to-es
+    depends_on:
+      - kafkaserver
+      - elasticsearch
+    networks: 
+      - fmap-int
+
+
   kibana:
     image: docker.elastic.co/kibana/kibana:7.10.2
     container_name: kibana
@@ -169,60 +180,7 @@ services:
     depends_on: 
       - elasticsearch
     networks: 
-      - fmap-int
-
-
-  connect:
-    container_name: connect
-    hostname: connect
-    image: confluentinc/cp-kafka-connect:3.3.0
-    ports:
-      - 8083:8083
-    depends_on:
-      - zookeeper
-      - kafkaserver
-    volumes:
-      - $PWD/connect-plugins:/connect-plugins
-    environment:
-      CONNECT_BOOTSTRAP_SERVERS: kafkaserver:9092
-      CONNECT_REST_PORT: 8083
-      CONNECT_GROUP_ID: "connect"
-      CONNECT_CONFIG_STORAGE_TOPIC: connect-config
-      CONNECT_OFFSET_STORAGE_TOPIC: connect-offsets
-      CONNECT_STATUS_STORAGE_TOPIC: connect-status
-      CONNECT_REPLICATION_FACTOR: 1
-      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
-      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
-      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
-      CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.storage.StringConverter"
-      CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
-      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
-      CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
-      CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
-      CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
-      CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
-      CONNECT_REST_ADVERTISED_HOST_NAME: "connect"
-      CONNECT_ZOOKEEPER_CONNECT: zookeeper:2181
-      CONNECT_PLUGIN_PATH: /connect-plugins
-      CONNECT_LOG4J_ROOT_LOGLEVEL: INFO
-      CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
-      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-3.3.0.jar
-      KAFKA_HEAP_OPTS: -Xmx512m -Xmx512m
-    # mem_limit: 1g
-    networks: 
-      - fmap-int     
-
-
-  kafka-connector-create: 
-    container_name: kafka-connector-create
-    build: 
-      context: kafkaconnect
-    image: fmap:kafka-connector-create
-    depends_on:
-      - kafkaserver
-      - connect
-    networks: 
-      - fmap-int
+      - fmap-int   
     
 
 networks:

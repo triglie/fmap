@@ -7,15 +7,15 @@ import math
 import pandas as pd 
 
 province_coords = {
-    'Palermo':      '(38,1121; 13,3366)', 
-    'Catania':      '(37,5013; 15,0742)', 
-    'Messina':      '(38,1943; 15,5505)', 
-    'Agrigento':    '(37,3219; 13,5896)', 
-    'Enna':         '(37,5599; 14,2900)', 
-    'Trapani':      '(38,0171; 12,5453)', 
-    'Caltanissetta':'(37,4888; 14,0458)', 
-    'Siracusa':     '(37,0862; 15,2738)', 
-    'Ragusa':       '(36,9293; 14,7180)'
+    'Palermo':      '38.1121,13.3366', 
+    'Catania':      '37.5013,15.0742', 
+    'Messina':      '38.1943,15.5505', 
+    'Agrigento':    '37.3219,13.5896', 
+    'Enna':         '37.5599,14.2900', 
+    'Trapani':      '38.0171,12.5453', 
+    'Caltanissetta':'37.4888,14.0458', 
+    'Siracusa':     '37.0862,15.2738', 
+    'Ragusa':       '36.9293,14.7180'
 } 
 
 def generate_path_by_province(province, dir_path='../logs', date_format='%d-%m-%Y'):
@@ -25,7 +25,7 @@ def generate_path_by_province(province, dir_path='../logs', date_format='%d-%m-%
 
 
 def get_coords_as_array(coords):
-    return [(float(value.replace(',','.'))) for value in coords[1:-1].split(';')]
+    return [(float(value)) for value in coords.split(',')]
 
 
 def get_nearest_province(province, set):
