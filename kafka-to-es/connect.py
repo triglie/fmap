@@ -50,11 +50,11 @@ def create_es_index_mapping(es):
             "properties": {
                 "@timestamp":   {"type": "date"},
                 "RSSI":         {"type": "long"},
-                "province":     {"type": "text"},
-                "station_name": {"type": "text"},
-                "FM":           {"type": "text"},
+                "province":     {"type": "keyword"},
+                "station_name": {"type": "keyword"},
+                "FM":           {"type": "keyword"},
                 "location":     {"type": "geo_point"},
-                "PI":           {"type": "text"}
+                "PI":           {"type": "keyword"}
             }
         }
     }, ignore=400)
