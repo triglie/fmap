@@ -37,6 +37,7 @@ def correct_message_format(msg: dict):
         '@timestamp':   msg.get('@timestamp'), 
         'RSSI':         int(msg.get('RSSI')), 
         'province':     msg.get('province'), 
+        'station_name': msg.get('station_name'), 
         'FM':           msg.get('FM'), 
         'location':     format_coords_as_geopoint(msg.get('coords')), 
         'PI':           msg.get('PI', None)
@@ -50,6 +51,7 @@ def create_es_index_mapping(es):
                 "@timestamp":   {"type": "date"},
                 "RSSI":         {"type": "long"},
                 "province":     {"type": "text"},
+                "station_name": {"type": "text"},
                 "FM":           {"type": "text"},
                 "location":     {"type": "geo_point"},
                 "PI":           {"type": "text"}
