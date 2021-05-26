@@ -17,6 +17,12 @@ $ docker-compose up -d
 
 
 
+## 📈 Dashboards (Kibana)
+
+![](./docs/assets/dashboards.png)
+
+
+
 ## 📊 Data flow 
 
 <p align="center">
