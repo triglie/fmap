@@ -74,6 +74,8 @@ if __name__ == "__main__":
     json_deserializer = lambda msg: json.loads(msg.decode('utf-8'))
 
     kconsumer = KafkaConsumer('rds-signal-output',
+        client_id='kafka-to-es-consumer', 
+        group_id ='kafka-to-es', 
         bootstrap_servers=['kafkaserver:9092'],
         value_deserializer=json_deserializer)
 
