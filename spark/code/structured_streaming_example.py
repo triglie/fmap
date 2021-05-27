@@ -1,27 +1,37 @@
-from __future__ import print_function
+from pyspark.sql import SparkSession 
+from pyspark.sql.functions import from_json, col, window
+from pyspark.sql.types import *
 
-import sys
+spark = SparkSession \
+  .builder \
+    .appName('rssi_signal_prediction') \
+      .getOrCreate()
 
-from pyspark import SparkContext
-from pyspark.sql import SparkSession
-from pyspark.streaming import StreamingContext
-from pyspark.sql.dataframe import DataFrame
+spark.sparkContext.setLogLevel("WARN")
 
-def elaborate(batch_df: DataFrame, batch_id: int):
-  batch_df.show(truncate=False)
+schema = StructType() \
+  .add("RSSI", LongType()) \
+  .add("province", StringType()) \
+  .add("station_name", StringType()) \
+  .add("FM", StringType()) \
+  .add("location", StringType()) \
+  .add("PI", StringType(), True)
 
-sc = SparkContext(appName="example")
-spark = SparkSession(sc)
-sc.setLogLevel("WARN")
-
-df = spark \
+signals = spark \
   .readStream \
   .format("kafka") \
   .option("kafka.bootstrap.servers", "kafkaserver:9092") \
   .option("subscribe", "rds-signal-output") \
-  .load()
+  .load() \
+  .select(from_json(col("value").cast("string"), schema) \
+  .alias("parsed_value"))
 
-df.writeStream \
+
+query = signals \
+  .groupBy('parsed_value.province', window('parsed_value', '1 hour')) \
+  .count() \
+  .writeStream \
   .format("console") \
-  .start() \
-  .awaitTermination()
+  .start()
+
+query.awaitTermination()
