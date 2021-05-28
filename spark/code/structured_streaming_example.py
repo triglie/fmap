@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession 
-from pyspark.sql.functions import from_json, col, create_map
+from pyspark.sql.functions import from_json, col, window, unix_timestamp, to_timestamp
 from pyspark.sql.types import *
 
 spark = SparkSession \
@@ -10,12 +10,16 @@ spark = SparkSession \
 spark.sparkContext.setLogLevel("WARN")
 
 schema = StructType() \
-  .add("RSSI", LongType()) \
-  .add("province", StringType()) \
-  .add("station_name", StringType()) \
-  .add("FM", StringType()) \
-  .add("location", StringType()) \
-  .add("PI", StringType(), True)
+  .add("station_name",  StringType(), True) \
+  .add("RSSI",          StringType(), True) \
+  .add("path",          StringType(), True) \
+  .add("@timestamp",    StringType(), True) \
+  .add("province",      StringType(), True) \
+  .add("FM",            StringType(), True) \
+  .add("@version",      StringType(), True) \
+  .add("host",          StringType(), True) \
+  .add("message",       StringType(), True) \
+  .add("coords",        StringType(), True)
 
 signals = spark \
   .readStream \
@@ -24,12 +28,26 @@ signals = spark \
   .option("subscribe", "rds-signal-output") \
   .load() \
   .select('timestamp', 'value') \
-  .withColumn("parsed_json", from_json(col("value").cast("string"), schema))\
-  .select(col('timestamp'), col('value'), col('parsed_json.*'))\
+  .withColumn("time", to_timestamp("timestamp", "YYYY/MM/DD hh:mm:ss")) \
+  .withColumn("json_value", col("value").cast("string")) \
+  .withColumn("parsed_json", from_json(col("json_value"), schema)) \
+  .select(
+    col('time'), 
+    col('json_value'), 
+    col('parsed_json.*')
+  )
 
-# signals_ = signals \
-#   .select(from_json(col("value").cast("string"), schema) \
-#   .alias("parsed_value")) \
+#
+# Uncomment to enable group by 
+#
+
+# signalsStacked = (
+#   signals.withWatermark("time", "1 minutes") \
+#     .groupBy(col("province"), "time") \
+#     .count()
+# )
+
+# signalsStacked \
 #   .writeStream \
 #   .format('console') \
 #   .start() \
@@ -37,14 +55,6 @@ signals = spark \
 
 signals.writeStream \
   .format('console') \
+  .option("truncate", "false") \
   .start() \
   .awaitTermination()
-
-# query = signals \
-#   .groupBy('parsed_value.province', window('parsed_value', '1 hour')) \
-#   .count() \
-#   .writeStream \
-#   .format("console") \
-#   .start()
-
-# query.awaitTermination()
