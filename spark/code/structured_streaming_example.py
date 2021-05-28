@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession 
-from pyspark.sql.functions import from_json, col, window
+from pyspark.sql.functions import from_json, col, create_map
 from pyspark.sql.types import *
 
 spark = SparkSession \
@@ -23,15 +23,28 @@ signals = spark \
   .option("kafka.bootstrap.servers", "kafkaserver:9092") \
   .option("subscribe", "rds-signal-output") \
   .load() \
-  .select(from_json(col("value").cast("string"), schema) \
-  .alias("parsed_value"))
+  .select('timestamp', 'value') \
+  .withColumn("parsed_json", from_json(col("value").cast("string"), schema))\
+  .select(col('timestamp'), col('value'), col('parsed_json.*'))\
 
+# signals_ = signals \
+#   .select(from_json(col("value").cast("string"), schema) \
+#   .alias("parsed_value")) \
+#   .writeStream \
+#   .format('console') \
+#   .start() \
+#   .awaitTermination()
 
-query = signals \
-  .groupBy('parsed_value.province', window('parsed_value', '1 hour')) \
-  .count() \
-  .writeStream \
-  .format("console") \
-  .start()
+signals.writeStream \
+  .format('console') \
+  .start() \
+  .awaitTermination()
 
-query.awaitTermination()
+# query = signals \
+#   .groupBy('parsed_value.province', window('parsed_value', '1 hour')) \
+#   .count() \
+#   .writeStream \
+#   .format("console") \
+#   .start()
+
+# query.awaitTermination()
