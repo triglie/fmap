@@ -73,7 +73,8 @@ def microcontroller(province):
             #https://www.speedcheck.org/it/wiki/rssi/
             data += f'RSSI={random.randint(-120,0)} \n'            
             log.write(data)
-            time.sleep(random.randint(1,3))
+            # time.sleep(random.randint(1,3))
+            time.sleep(.5)
 
 if __name__ == "__main__":
     print("Starting threads")
