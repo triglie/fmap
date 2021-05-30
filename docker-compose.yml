@@ -80,7 +80,7 @@ services:
   kafkastream:
     build: 
         context: kafkastream
-    image: fmap.server:stream
+    image: fmap:stream
     container_name: kafkastream
     depends_on: 
         - kafkaserver
