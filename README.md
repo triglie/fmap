@@ -50,7 +50,7 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 
 
 
-## <img src="./docs/assets/arduino.png" style="zoom: 100%;" > Arduino
+## <img src="./docs/assets/arduino_logo.png" style="zoom: 100%;" > Arduino
 
 <a href="https://github.com/triglie/fmap/tree/main/arduino">Click here.</a>
 
