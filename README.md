@@ -106,7 +106,11 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 
 *"Elasticsearch is a distributed, RESTful search and analytics engine  capable of addressing a growing number of use cases. As the heart of the Elastic Stack, it centrally stores your data for lightning fast search, fine‑tuned relevancy, and powerful analytics that scale with ease. "*
 
-<img src="./docs/assets/json_elasticsearch.jpg">
+<p align="center">
+    <img src="./docs/assets/json_elasticsearch.jpg">
+</p>
+
+
 
 
 
@@ -120,7 +124,11 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 
 *"Apache Spark is a lightning-fast **unified analytics engine** for big data and machine learning. It was originally developed at UC Berkeley in 2009."*
 
-<img src="./docs/assets/json_spark.jpg">
+<p align="center">
+    <img src="./docs/assets/json_spark.jpg">
+</p>
+
+
 
 
 
