@@ -41,7 +41,7 @@ uint16_t g_block1;
 bool lowLevelDebug = false;
 RADIO_FREQ frequency;
 char province[128] = "Catania\0";
-char coords[128] = "(37,5013; 15,0742)\0";
+char coords[128] = "37.5013,15.0742\0";
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - -
