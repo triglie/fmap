@@ -28,15 +28,15 @@ $ docker-compose up -d
 
 
 
-### <img src="./docs/assets/frequence.png" style="zoom: 8%"> PI/frequence - Station Conversion maps
+## <img src="./docs/assets/frequence.png" style="width: 6%"> PI/frequence - Station Conversion maps
 
  Frequency - StationName (province) maps are stored in `fmdata` directory: 
 
 | Province | File path                                                    |
 | -------- | ------------------------------------------------------------ |
-| Catania  | [kafkastream/fmdata/fm-station-map-catania.csv]("https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/fm-station-map-catania.csv") |
-| Messina  | [kafkastream/fmdata/fm-station-map-messina.csv]("https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/fm-station-map-messina.csv") |
-| Palermo  | [kafkastream/fmdata/fm-station-map-palermo.csv]("https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/fm-station-map-palermo.csv") |
+| Catania  | <a href="https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/fm-station-map-catania.csv">kafkastream/fmdata/fm-station-map-catania.csv</a> |
+| Messina  | <a href="https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/fm-station-map-messina.csv">kafkastream/fmdata/fm-station-map-messina.csv</a> |
+| Palermo  | <a href="https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/fm-station-map-palermo.csv">kafkastream/fmdata/fm-station-map-palermo.csv</a> |
 
 > Any other province outside of this three uses the csv of the nearest province. 
 
@@ -44,13 +44,13 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 
 | State  | File path                                                    |
 | ------ | ------------------------------------------------------------ |
-| Italia | [kafkastream/fmdata/complete-pi-station-map.csv]("https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/complete-pi-station-map.csv") |
+| Italia | <a href="https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/complete-pi-station-map.csv">kafkastream/fmdata/complete-pi-station-map.csv</a> |
 
 
 
 
 
-## <img src="https://www.vectorlogo.zone/logos/arduino/arduino-icon.svg">Arduino
+## <img src="https://www.vectorlogo.zone/logos/arduino/arduino-icon.svg"> Arduino
 
 <a href="https://github.com/triglie/fmap/tree/main/arduino">Click here.</a>
 
@@ -58,7 +58,7 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 
 
 
-## <img src="https://www.vectorlogo.zone/logos/elasticco_logstash/elasticco_logstash-icon.svg" style="zoom:80%;" >LogStash
+## <img src="https://www.vectorlogo.zone/logos/elasticco_logstash/elasticco_logstash-icon.svg" style="zoom:80%;" > LogStash
 
 
 
@@ -77,7 +77,7 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 
 
 
-## <img src="https://www.vectorlogo.zone/logos/apache_kafka/apache_kafka-icon.svg">Kafka Streams
+## <img src="https://www.vectorlogo.zone/logos/apache_kafka/apache_kafka-icon.svg"> Kafka Streams
 
 <p align="center">
     <img src="./docs/assets/kafka-stream-schema.png">
