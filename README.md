@@ -28,7 +28,7 @@ $ docker-compose up -d
 
 
 
-## <img src="./docs/assets/frequence.png" style="width: 6%; width-max: 6%"> PI/frequence - Station Conversion maps
+## <img src="./docs/assets/frequence.png" style="width: 6%; max-width: 6%"> PI/frequence - Station Conversion maps
 
  Frequency - StationName (province) maps are stored in `fmdata` directory: 
 
