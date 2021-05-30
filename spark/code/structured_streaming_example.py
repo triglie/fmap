@@ -37,6 +37,7 @@ def get_rds_signal_stream(schema: StructType):
         .format('kafka') \
         .option('kafka.bootstrap.servers', 'kafkaserver:9092') \
         .option('subscribe', 'rds-signal-output') \
+        .option("kafka.group.id", "spark-consumer") \
         .load() \
         .select('timestamp', 'value') \
         .withColumn('time', to_timestamp('timestamp', 'YYYY/MM/DD hh:mm:ss')) \

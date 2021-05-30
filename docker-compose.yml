@@ -62,7 +62,7 @@ services:
     command: "bash -c 'echo Waiting for Kafka to be ready... && \
                         cub kafka-ready -b kafkaserver:9092 1 200 && \
                         kafka-topics --create --topic rds-signal --if-not-exists --zookeeper zookeeper:2181 --partitions 1 --replication-factor 1 && \
-                        kafka-topics --create --topic rds-signal-output --if-not-exists --zookeeper zookeeper:2181 --partitions 2 --replication-factor 1 &&\
+                        kafka-topics --create --topic rds-signal-output --if-not-exists --zookeeper zookeeper:2181 --partitions 1 --replication-factor 1 &&\
                         sleep infinity'"
     environment:
         KAFKA_BROKER_ID: ignored
@@ -247,7 +247,14 @@ services:
         - elasticsearch
     networks: 
         - fmap-int
-
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1g
+        reservations:
+          cpus: '0.5'
+          memory: 500m
 
 networks:
 
