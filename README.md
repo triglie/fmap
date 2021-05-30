@@ -12,7 +12,7 @@
 ```shell
 $ git clone https://github.com/triglie/fmap.git
 $ cd fmap
-$ docker-compose up -d
+$ ./run.sh
 ```
 
 
