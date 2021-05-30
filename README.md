@@ -22,8 +22,9 @@ $ ./run.sh
 ## 📊 Data flow 
 
 <p align="center">
-  <img src="./docs/assets/data-flow-card.png" alt="data-flow" width=500/>
+  <img src="./docs/assets/data-flow.png" alt="data-flow" width=500/>
 </p>
+
 
 
 
