@@ -1,4 +1,4 @@
-# <img src="https://www.vectorlogo.zone/logos/arduino/arduino-icon.svg">Arduino FM receiver
+# <img src="./img/arduino.png">Arduino FM receiver
 
 In this repository you can find the Arduino FM receiver that is used to capture RDS package from FM frequencies and extracts information such as:
 
