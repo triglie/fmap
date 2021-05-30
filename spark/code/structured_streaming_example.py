@@ -133,7 +133,7 @@ if __name__ == "__main__":
     es_mapping = {
         "mappings": {
             "properties": {
-                "@timestamp":       {"type": "date"},
+                "@timestamp":       {"type": "date", "format": "epoch_second"},
                 "estimated_RSSI":   {"type": "long"},
                 "province":         {"type": "keyword"},
                 "station_name":     {"type": "keyword"},
