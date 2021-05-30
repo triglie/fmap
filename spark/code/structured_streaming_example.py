@@ -61,7 +61,7 @@ def get_resulting_df_schema():
         .add("@timestamp",      StringType()) \
         .add("station_name",    StringType()) \
         .add("province",        StringType()) \
-        .add("RSSI",            LongType()) \
+        .add("estimated_RSSI",  LongType()) \
         .add("FM",              StringType()) \
         .add("coords",          StringType())
 
@@ -71,7 +71,7 @@ def get_output_df():
         '@timestamp', 
         'station_name', 
         'province', 
-        'RSSI', 
+        'estimated_RSSI', 
         'FM', 
         'coords', 
     ])
@@ -97,7 +97,7 @@ def make_series(df, timestamp, predicted_rssi) -> pd.Series:
         '@timestamp', 
         'station_name', 
         'province', 
-        'RSSI',
+        'estimated_RSSI',
         'FM',
         'coords', 
     ])
@@ -133,13 +133,13 @@ if __name__ == "__main__":
     es_mapping = {
         "mappings": {
             "properties": {
-                "@timestamp":   {"type": "date"},
-                "RSSI":         {"type": "long"},
-                "province":     {"type": "keyword"},
-                "station_name": {"type": "keyword"},
-                "FM":           {"type": "keyword"},
-                "coords":       {"type": "text"},
-                "PI":           {"type": "keyword"}
+                "@timestamp":       {"type": "date"},
+                "estimated_RSSI":   {"type": "long"},
+                "province":         {"type": "keyword"},
+                "station_name":     {"type": "keyword"},
+                "FM":               {"type": "keyword"},
+                "coords":           {"type": "text"},
+                "PI":               {"type": "keyword"}
             }
         }
     }
