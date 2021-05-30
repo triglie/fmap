@@ -174,58 +174,58 @@ services:
   # Elasticsearch                 #
   #-------------------------------#
 
-  # elasticsearch:
-  #   container_name: elasticsearch
-  #   hostname: elasticsearch
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
-  #   ports:
-  #     - "9200:9200"
-  #     - "9300:9300"      
-  #   environment:
-  #     - xpack.security.enabled=false
-  #     - discovery.type=single-node
-  #     - bootstrap.memory_lock=true
-  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-  #     - cluster.routing.allocation.disk.threshold_enabled=false
-  #   ulimits:
-  #     memlock:
-  #       soft: -1
-  #       hard: -1
-  #   # mem_limit: 1g
-  #   networks: 
-  #   - fmap-int 
+  elasticsearch:
+    container_name: elasticsearch
+    hostname: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    ports:
+      - "9200:9200"
+      - "9300:9300"      
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    # mem_limit: 1g
+    networks: 
+    - fmap-int 
 
 
   #-------------------------------#
   # kafka consumer to ES (python) #
   #-------------------------------#
 
-  # kafka-to-es: 
-  #   container_name: kafka-to-es
-  #   build: 
-  #     context: kafka-to-es
-  #   image: fmap:kafka-to-es
-  #   depends_on:
-  #     - kafkaserver
-  #     - elasticsearch
-  #   networks: 
-  #     - fmap-int
+  kafka-to-es: 
+    container_name: kafka-to-es
+    build: 
+      context: kafka-to-es
+    image: fmap:kafka-to-es
+    depends_on:
+      - kafkaserver
+      - elasticsearch
+    networks: 
+      - fmap-int
 
 
   #-------------------------------#
   # Kibana                        #
   #-------------------------------#
 
-  # kibana:
-  #   image: docker.elastic.co/kibana/kibana:7.10.2
-  #   container_name: kibana
-  #   hostname: kibana
-  #   ports:
-  #     - "5601:5601"
-  #   depends_on: 
-  #     - elasticsearch
-  #   networks: 
-  #     - fmap-int   
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.2
+    container_name: kibana
+    hostname: kibana
+    ports:
+      - "5601:5601"
+    depends_on: 
+      - elasticsearch
+    networks: 
+      - fmap-int   
     
 
   #-------------------------------#
@@ -244,7 +244,7 @@ services:
         - "4040:4040"
     depends_on: 
         - kafkaserver
-        # - elasticsearch
+        - elasticsearch
     networks: 
         - fmap-int
 
