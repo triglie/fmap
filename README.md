@@ -28,7 +28,7 @@ $ docker-compose up -d
 
 
 
-## <img src="./docs/assets/frequence.png" style="width: 6%; max-width: 6%"> PI/frequence - Station Conversion maps
+## PI/frequence - Station Conversion maps
 
  Frequency - StationName (province) maps are stored in `fmdata` directory: 
 
@@ -50,7 +50,7 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 
 
 
-## <img src="https://www.vectorlogo.zone/logos/arduino/arduino-icon.svg"> Arduino
+## <img src="https://www.vectorlogo.zone/logos/arduino/arduino-icon.svg" style="zoom: 50%;" > Arduino
 
 <a href="https://github.com/triglie/fmap/tree/main/arduino">Click here.</a>
 
