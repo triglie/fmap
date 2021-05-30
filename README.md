@@ -10,16 +10,12 @@
 ## ⚡ Quickstart
 
 ```shell
-$ git clone (this repo)
+$ git clone https://github.com/triglie/fmap.git
 $ cd fmap
 $ docker-compose up -d
 ```
 
 
-
-## 📈 Dashboards (Kibana)
-
-![](./docs/assets/dashboards.png)
 
 
 
@@ -31,23 +27,91 @@ $ docker-compose up -d
 
 
 
-### PI/frequence - Station Conversion maps
+
+### <img src="./docs/assets/frequence.png" style="zoom: 8%"> PI/frequence - Station Conversion maps
 
  Frequency - StationName (province) maps are stored in `fmdata` directory: 
 
-| Province | File path                                     |
-| -------- | --------------------------------------------- |
-| Catania  | kafkastream/fmdata/fm-station-map-catania.csv |
-| Messina  | kafkastream/fmdata/fm-station-map-messina.csv |
-| Palermo  | kafkastream/fmdata/fm-station-map-palermo.csv |
+| Province | File path                                                    |
+| -------- | ------------------------------------------------------------ |
+| Catania  | [kafkastream/fmdata/fm-station-map-catania.csv]("https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/fm-station-map-catania.csv") |
+| Messina  | [kafkastream/fmdata/fm-station-map-messina.csv]("https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/fm-station-map-messina.csv") |
+| Palermo  | [kafkastream/fmdata/fm-station-map-palermo.csv]("https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/fm-station-map-palermo.csv") |
 
 > Any other province outside of this three uses the csv of the nearest province. 
 
 Frequency - PI - StationName map is stored in `fmdata` directory: 
 
-| State  | File path                                      |
-| ------ | ---------------------------------------------- |
-| Italia | kafkastream/fmdata/complete-pi-station-map.csv |
+| State  | File path                                                    |
+| ------ | ------------------------------------------------------------ |
+| Italia | [kafkastream/fmdata/complete-pi-station-map.csv]("https://github.com/triglie/fmap/blob/main/kafkastream/fmdata/complete-pi-station-map.csv") |
+
+
+
+
+
+## <img src="https://www.vectorlogo.zone/logos/arduino/arduino-icon.svg">Arduino
+
+<a href="https://github.com/triglie/fmap/tree/main/arduino">Click here.</a>
+
+
+
+
+
+## <img src="https://www.vectorlogo.zone/logos/elasticco_logstash/elasticco_logstash-icon.svg" style="zoom:80%;" >LogStash
+
+
+
+### What is it?
+
+*"Logstash is a free and open server-side data processing pipeline that  ingests data from a multitude of sources, transforms it, and then sends  it to your favorite "stash.""*
+
+
+
+<p>
+    <img src="./docs/assets/logstash.jpg">
+</p>
+
+
+
+
+
+
+## <img src="https://www.vectorlogo.zone/logos/apache_kafka/apache_kafka-icon.svg">Kafka Streams
+
+<p align="center">
+    <img src="./docs/assets/kafka-stream-schema.png">
+</p>
+
+### What is it?
+
+*"Kafka Streams is a client library for building applications and  microservices, where the input and output data are stored in an Apache Kafka® cluster. It combines the simplicity of writing and  deploying standard Java and Scala applications on the client side with the benefits of Kafka’s server-side cluster technology."*
+
+
+
+### UML Schema
+
+<p align="center">
+    <img src="./docs/assets/kafka-stream-uml.jpg">
+</p>
+
+
+
+
+## <img src="https://www.vectorlogo.zone/logos/elasticco_kibana/elasticco_kibana-icon.svg"> Dashboards (Kibana)
+
+
+
+### What is it?
+
+*"Kibana is an free and open frontend application that sits on top of the  Elastic Stack, providing search and data visualization capabilities for  data indexed in Elasticsearch. Commonly known as the charting tool for  the Elastic Stack (previously referred to as the ELK Stack after  Elasticsearch, Logstash, and Kibana), Kibana also acts as the user  interface for monitoring, managing, and securing an Elastic Stack  cluster — as well as the centralized hub for built-in solutions  developed on the Elastic Stack. Developed in 2013 from within the  Elasticsearch community, Kibana has grown to become the window into the  Elastic Stack itself, offering a portal for users and companies."*
+
+
+
+![](./docs/assets/dashboards.png)
+
+
+
 
 
 
@@ -64,14 +128,9 @@ Frequency - PI - StationName map is stored in `fmdata` directory:
 
 
 
-## Building kafkastream apps 
-
-[...]
-
 
 
 ## Authors 
 
 * [Luigi Seminara](https://github.com/Gigi-G)
 * [Lemuel Puglisi](https://github.com/LemuelPuglisi) 
-
