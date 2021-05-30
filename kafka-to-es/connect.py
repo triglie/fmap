@@ -21,7 +21,7 @@ def wait_until_es_is_up():
 
 def wait_until_kafka_is_up():
     """Kafka may be up (kafka doesn't provides http endpoints)."""
-    time.sleep(5)
+    time.sleep(25)
 
 
 def format_coords_as_geopoint(coords):
@@ -48,7 +48,7 @@ def create_es_index_mapping(es):
     es.indices.create(index='rds-signal-output', body={
         "mappings": {
             "properties": {
-                "@timestamp":   {"type": "date"},
+                "@timestamp":   {"type": "date", "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"},
                 "RSSI":         {"type": "long"},
                 "province":     {"type": "keyword"},
                 "station_name": {"type": "keyword"},
@@ -73,15 +73,24 @@ if __name__ == "__main__":
 
     json_deserializer = lambda msg: json.loads(msg.decode('utf-8'))
 
-    kconsumer = KafkaConsumer('rds-signal-output',
-        client_id='kafka-to-es-consumer', 
-        group_id ='kafka-to-es', 
-        bootstrap_servers=['kafkaserver:9092'],
-        value_deserializer=json_deserializer)
+    try:
 
-    elasticsearch = Elasticsearch([{'host':'elasticsearch', 'port': 9200}])
-    create_es_index_mapping(elasticsearch)
+        kconsumer = KafkaConsumer('rds-signal-output',
+            client_id='kafka-to-es-consumer', 
+            group_id ='kafka-to-es', 
+            bootstrap_servers=['kafkaserver:9092'],
+            value_deserializer=json_deserializer)
 
-    for message in kconsumer:
-        message = correct_message_format(message.value)
-        ingest_msg_to_elasticsearch(message, elasticsearch)
+        elasticsearch = Elasticsearch([{'host':'elasticsearch', 'port': 9200}])
+        create_es_index_mapping(elasticsearch)
+
+        for message in kconsumer:
+            print('sending message to es.')
+            message = correct_message_format(message.value)
+            ingest_msg_to_elasticsearch(message, elasticsearch)
+
+    except Exception as err:
+        exception_type = type(err).__name__
+        print(exception_type)
+
+
