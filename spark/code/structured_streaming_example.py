@@ -105,7 +105,7 @@ def make_series(df, timestamp, predicted_rssi) -> pd.Series:
 
 
 def predict_value(model, milliseconds):
-    rssi_range = lambda s: max(min(0, s), -70)
+    rssi_range = lambda s: max(min(0, s), -120)
     s = model.predict([[milliseconds]])[0]
     return rssi_range(s)
     
@@ -157,15 +157,6 @@ if __name__ == "__main__":
             print("Successfully created index:", response['index'])
 
     win = window(signalStream.time, "1 minutes")
-    # signalStream \
-    #     .groupBy('province', 'station_name', win) \
-    #     .applyInPandas(predict, get_resulting_df_schema()) \
-    #     .writeStream \
-    #     .format('console') \
-    #     .option("truncate", "false") \
-    #     .start() \
-    #     .awaitTermination()
-
     signalStream \
         .groupBy('province', 'station_name', win) \
         .applyInPandas(predict, get_resulting_df_schema()) \
