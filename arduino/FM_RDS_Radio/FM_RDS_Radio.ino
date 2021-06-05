@@ -104,9 +104,10 @@ void setFrequency(RADIO_FREQ f) {
 char* printInfo() {
   char* info = (char *) malloc(sizeof(char) * 1024);
   char s[12];
+  char* rssi = radio.debugRadioInfo();
   radio.formatFrequency(s, sizeof(s));
-  sprintf(info, "province=%s coords=%s FM=%s RSSI=%s\0", province, coords, s, radio.debugRadioInfo());
-  delay(1000);
+  sprintf(info, "province=%s coords=%s FM=%s RSSI=%s\0", province, coords, s, rssi);
+  free(rssi);
   return info;
 } // printInfo()
 
@@ -117,7 +118,7 @@ void checkRDS() {
   startSeek = millis(); // the time the delay started
   bool delayRunning = true; // true if still waiting for delay to finish
   while(true) {
-    if (delayRunning && ((millis() - startSeek) >= 20000)) {
+    if (delayRunning && ((millis() - startSeek) >= 50)) {
       delayRunning = false; // prevent this code being run more then once
       break;
     }
