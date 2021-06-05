@@ -19,5 +19,7 @@ while True:
         if len(split) > 1 and split[1][0] == "0":
             ser_bytes = split[0] + "FM=1" + split[1] 
         if len(ser_bytes) > 5:
+            split = ser_bytes.split("RSSI=")
+            ser_bytes += split[0] + "RSSI=-" + split[1]
             f.write(ser_bytes)
         
