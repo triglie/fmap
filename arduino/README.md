@@ -73,6 +73,16 @@ python3 serial_reading.py
 
 
 
+If you get an error you have to install pyserial, you can do that using the following command:
+
+```shell
+pip install pyserial
+```
+
+
+
+
+
 ## On Windows (WSL)
 
 **WARNING:** You can't use the scripts **YouDontNeedSpotify/Arduino/bin** because of WSL, so you have to wait future update. Well, the best solution for Windows is to use the official <a href="https://www.microsoft.com/it-it/p/arduino-ide/9nblggh4rsd8?ocid=badge&rtc=1&activetab=pivot:overviewtab" target="_blank">Arduino IDE</a>.
