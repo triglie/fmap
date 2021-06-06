@@ -3,6 +3,7 @@ from datetime import datetime
 
 # COM port on windows /dev/tty* on Unix system
 port = "COM3"
+# port = "/dev/tty3"
 
 ser = serial.Serial(port, 115200, timeout = 1000)
 ser.flushInput()
@@ -20,6 +21,6 @@ while True:
             ser_bytes = split[0] + "FM=1" + split[1] 
         if len(ser_bytes) > 5:
             split = ser_bytes.split("RSSI=")
-            ser_bytes += split[0] + "RSSI=-" + split[1]
+            ser_bytes = split[0] + "RSSI=-" + split[1]
             f.write(ser_bytes)
         

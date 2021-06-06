@@ -79,4 +79,5 @@ def microcontroller(province):
 if __name__ == "__main__":
     print("Starting threads")
     for province in province_coords:
-        threading.Thread(target=microcontroller, args=(province, )).start()
+        if (province != "Catania"):
+            threading.Thread(target=microcontroller, args=(province, )).start()
